@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "max-and-ruby-frontend"
+    }
+  },
+  "defaultProject": "max-and-ruby-frontend",
+  "cli": {
+    "analytics": "6afe0ac9-8e39-4c14-a137-bae8ab85ff8d"
+  }
 }
