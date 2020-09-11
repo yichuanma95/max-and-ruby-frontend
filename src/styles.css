@@ -1,2 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap";
+
+/* Sticky footer trick from https://css-tricks.com/couple-takes-sticky-footer/ */
+/* This is for the default footer (on desktop/laptop screens). */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.content {
+  min-height: 100%;
+  margin: 0 auto -50px;
+}
+
+.push {
+  height: 50px;
+}
+
+.footer {
+  height: 50px;
+  background-color: lightblue;
+  text-align: center;
+}
+
+/* This is for screens that make the footer message span 3 lines. */
+@media (max-width: 663px) {
+  .content {
+    min-height: 100%;
+    margin: 0 auto -75px;
+  }
+
+  .push {
+    height: 75px;
+  }
+
+  .footer {
+    height: 75px;
+    background-color: lightblue;
+    text-align: center;
+  }
+}
+
+/* This is for screens that make the footer message span 4 lines. */
+@media (max-width: 446px) {
+  .content {
+    min-height: 100%;
+    margin: 0 auto -100px;
+  }
+
+  .push {
+    height: 100px;
+  }
+
+  .footer {
+    height: 100px;
+    background-color: lightblue;
+    text-align: center;
+  }
+}
+
+/* This is for screens that make the footer message span 5 lines. */
+@media (max-width: 341px) {
+  .content {
+    min-height: 100%;
+    margin: 0 auto -125px;
+  }
+
+  .push {
+    height: 125px;
+  }
+
+  .footer {
+    height: 125px;
+    background-color: lightblue;
+    text-align: center;
+  }
+}
