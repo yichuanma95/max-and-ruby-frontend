@@ -1,1 +1,30 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-md justify-content-center navbar-dark bg-secondary">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand">Max & Ruby</a>
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
+      <ul class="navbar-nav mr-auto">
+        <li routerLinkActive="active" class="nav-item">
+          <a href="#" class="nav-link">About</a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a href="#" class="nav-link">Characters</a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a href="#" class="nav-link">Episodes</a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a href="#" class="nav-link">Ruby's Best Friend Depth Chart</a>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <a href="#" class="nav-link">New Episode</a>
+        </li>
+      </ul>
+      <div class="navbar-nav my-2 my-lg-0">
+        <a href="#" class="nav-link nav-item" routerLinkActive="active">Sign In</a>
+      </div>
+    </div>
+  </div>
+</nav>
