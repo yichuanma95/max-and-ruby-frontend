@@ -1,3 +1,14 @@
+<div class="list-group">
+  <a
+    class="list-group-item clearfix"
+    *ngFor="let character of characters"
+    [routerLink]="[character.id, character.name]"
+    style="cursor: pointer"
+  >
+    {{character.name}}
+  </a>
+</div>
+<br/>
 <div class="text-center">
   <img src="assets/img/20200418_043306.jpg" alt="Max Meets Morris" width="500" class="img-fluid">
   <p class="font-italic">What could Max and Morris possibly be thinking?</p>

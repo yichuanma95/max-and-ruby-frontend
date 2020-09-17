@@ -9,6 +9,7 @@ import { AboutComponent } from './about/about.component';
 import { CharactersComponent } from './characters/characters.component';
 import { EpisodesComponent } from './episodes/episodes.component';
 import { DepthChartComponent } from './depth-chart/depth-chart.component';
+import { CharacterComponent } from './characters/character/character.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DepthChartComponent } from './depth-chart/depth-chart.component';
     AboutComponent,
     CharactersComponent,
     EpisodesComponent,
-    DepthChartComponent
+    DepthChartComponent,
+    CharacterComponent
   ],
   imports: [
     BrowserModule,

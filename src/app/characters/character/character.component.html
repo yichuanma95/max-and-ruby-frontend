@@ -1,0 +1,18 @@
+<h1>{{character.name}}</h1>
+<p *ngFor="let p of character.bio.split('\n')">{{p}}</p>
+<br/>
+<h3>Episode Appearances</h3>
+<p *ngIf="character.name === 'Max'">Max appears in every episode in this series.</p>
+<p *ngIf="character.name === 'Ruby'">Ruby appears in every episode in this series.</p>
+<br/>
+<div class="text-center">
+  <div *ngIf="character.name === 'Max'">
+    <img src="assets/img/20200621_040839.jpg" class="img-fluid" width="500" alt="Max with Space Cadet">
+    <p class="font-italic">"ALERT! ALERT! PREPARE THE DISPOSAL UNIT! PREPARE THE DISPOSAL UNIT!"</p>
+  </div>
+  <div *ngIf="character.name === 'Ruby'">
+    <img src="assets/img/20200419_020217.jpg" class="img-fluid" width="500" alt="Max hiding from egg">
+    <p class="font-italic">"You can't hide from your egg, Max!"</p>
+  </div>
+</div>
+<br/><br/>
