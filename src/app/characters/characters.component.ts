@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BunnyCharacter} from './character.model';
 import {CharactersService} from './characters.service';
 import {Subscription} from 'rxjs';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-characters',
@@ -11,6 +12,12 @@ import {Subscription} from 'rxjs';
 export class CharactersComponent implements OnInit, OnDestroy {
   characters: BunnyCharacter[] = [];
   characterSub: Subscription;
+  lastQuery = '';
+
+  onSearch(form: NgForm) {
+    this.lastQuery = form.value.searchQuery;
+    this.characters = this.charactersService.characters.filter(c => c.name.toLowerCase().includes(this.lastQuery.toLowerCase()));
+  }
 
   constructor(private charactersService: CharactersService) { }
 

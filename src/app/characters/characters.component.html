@@ -1,3 +1,19 @@
+<form #searchChar="ngForm" (ngSubmit)="onSearch(searchChar)">
+  <div class="row">
+    <div class="col-md-8 form-group">
+      <input class="form-control" ngModel name="searchQuery" type="text" placeholder="Name of your favorite bunny">
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-primary btn-block" type="submit">Search Bunnies</button>
+    </div>
+  </div>
+</form>
+
+<br/>
+<div class="alert alert-danger" *ngIf="characters.length === 0">
+  No bunnies with name containing "{{lastQuery}}" found.
+</div>
+
 <div class="list-group">
   <a
     class="list-group-item clearfix"
