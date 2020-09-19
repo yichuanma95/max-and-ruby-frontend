@@ -10,6 +10,8 @@ import { CharactersComponent } from './characters/characters.component';
 import { EpisodesComponent } from './episodes/episodes.component';
 import { DepthChartComponent } from './depth-chart/depth-chart.component';
 import { CharacterComponent } from './characters/character/character.component';
+import { AuthComponent } from './auth/auth.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,14 @@ import { CharacterComponent } from './characters/character/character.component';
     CharactersComponent,
     EpisodesComponent,
     DepthChartComponent,
-    CharacterComponent
+    CharacterComponent,
+    AuthComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

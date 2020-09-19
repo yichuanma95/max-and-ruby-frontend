@@ -2,8 +2,14 @@
 <p *ngFor="let p of character.bio.split('\n')">{{p}}</p>
 <br/>
 <h3>Episode Appearances</h3>
-<p *ngIf="character.name === 'Max'">Max appears in every episode in this series.</p>
-<p *ngIf="character.name === 'Ruby'">Ruby appears in every episode in this series.</p>
+<p *ngIf="character.name === 'Max'">
+  Max appears in every episode in this series.
+  <a routerLink="/episodes">Search for your favorite episodes.</a>
+</p>
+<p *ngIf="character.name === 'Ruby'">
+  Ruby appears in every episode in this series.
+  <a routerLink="/episodes">Search for your favorite episodes.</a>
+</p>
 <br/>
 <div class="text-center">
   <div *ngIf="character.name === 'Max'">
