@@ -1,0 +1,78 @@
+<form [formGroup]="newEpisodeForm" (ngSubmit)="onSubmit()">
+  <button class="btn btn-success" type="submit" [disabled]="!newEpisodeForm.valid">Save</button>
+  <span style="margin: 10px"></span>
+  <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+  <br/><br/>
+  <div class="row">
+    <div class="col-md-4 form-group">
+      <label for="season">Season No.</label>
+      <select id="season" formControlName="season" class="form-control">
+        <option *ngFor="let s of seasons" [value]="s">{{s}}</option>
+      </select>
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="episode-no">Overall Episode No.</label>
+      <input id="episode-no" formControlName="episodeNo" class="form-control" type="number" min="1">
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="segment">Segment</label>
+      <select id="segment" formControlName="segment" class="form-control">
+        <option *ngFor="let c of 'ABC'.split('')" [value]="c">{{c}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 form-group">
+      <label for="title">Episode Title</label>
+      <input id="title" formControlName="title" class="form-control" type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 form-group">
+      <label for="characters">
+        Besides Max & Ruby, which other characters appear in this episode (cannot be background appearances)?
+      </label>
+      <select multiple class="form-control" id="characters" formControlName="characters" size="20">
+        <option *ngFor="let character of characters" [value]="character.id">{{character.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 form-group">
+      <label for="plot">Episode Plot</label>
+      <textarea type="text" id="plot" class="form-control" rows="8" formControlName="plot"></textarea>
+    </div>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="little-brothers" formControlName="littleBrothers">
+    <label for="little-brothers" class="form-check-label">
+      Check here if Ruby (or Louise) says "Little brothers..." (or anything similar) with (or without) a sigh at least
+      once in this episode.
+    </label>
+  </div>
+  <div formArrayName="maxWords">
+    <div
+      class="row"
+      *ngFor="let _ of maxWordsControls; let i = index"
+      [formGroupName]="i"
+      style="margin-top: 10px; margin-bottom: 10px;"
+    >
+      <div class="col-9">
+        <input type="text" class="form-control" formControlName="words"/>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-danger" (click)="onDeleteMaxWord(i)">X</button>
+      </div>
+    </div>
+    <br/>
+    <button type="button" class="btn btn-success" (click)="onAddMaxWords()">
+      Add Words Or Phrases That Max Says In This Episode
+    </button>
+  </div>
+</form>
+<br/>
+<div class="text-center">
+  <img src="assets/img/20200616_145112.jpg" width="500" alt="Thank you" class="img-fluid">
+  <p class="font-italic">"Thank you!"</p>
+</div>
+<br/><br/>

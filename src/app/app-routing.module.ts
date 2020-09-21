@@ -7,6 +7,7 @@ import {EpisodesComponent} from './episodes/episodes.component';
 import {DepthChartComponent} from './depth-chart/depth-chart.component';
 import {CharacterComponent} from './characters/character/character.component';
 import {AuthComponent} from './auth/auth.component';
+import {NewEpisodeComponent} from './new-episode/new-episode.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'characters/:id/:name', component: CharacterComponent},
   {path: 'episodes', component: EpisodesComponent},
   {path: 'depth-chart', component: DepthChartComponent},
-  {path: 'login', component: AuthComponent}
+  {path: 'login', component: AuthComponent},
+  {path: 'new-episode', component: NewEpisodeComponent}
 ];
 
 @NgModule({

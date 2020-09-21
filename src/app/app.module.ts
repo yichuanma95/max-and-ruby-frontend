@@ -11,7 +11,8 @@ import { EpisodesComponent } from './episodes/episodes.component';
 import { DepthChartComponent } from './depth-chart/depth-chart.component';
 import { CharacterComponent } from './characters/character/character.component';
 import { AuthComponent } from './auth/auth.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NewEpisodeComponent } from './new-episode/new-episode.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,14 @@ import {FormsModule} from '@angular/forms';
     EpisodesComponent,
     DepthChartComponent,
     CharacterComponent,
-    AuthComponent
+    AuthComponent,
+    NewEpisodeComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
