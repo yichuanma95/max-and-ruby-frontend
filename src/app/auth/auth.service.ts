@@ -61,5 +61,10 @@ export class AuthService {
     this.location.back();
   }
 
+  handleSessionNotInServer(_) {
+    localStorage.removeItem("admin");
+    this.navigateToLogin();
+  }
+
   constructor(private episodeServiceClient: EpisodeServiceClient, private router: Router, private location: Location) { }
 }

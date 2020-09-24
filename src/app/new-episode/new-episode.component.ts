@@ -65,10 +65,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
     this.episodesService.addEpisode(newEpisode).then(episode => {
       this.addedEpisode = episode;
       return this.episodesService.updateMaxWords(maxWords);
-    }, _ => {
-      localStorage.removeItem("admin");
-      this.authService.navigateToLogin();
-    }).then(maxWords => {
+    }, this.authService.handleSessionNotInServer).then(maxWords => {
       let mwids = maxWords.map(word => word.id);
       return this.episodesService.addMaxWordsToEpisode(this.addedEpisode.id, mwids);
     }).then(_ => this.charactersService.addCharactersToEpisode(this.addedEpisode.id, appearingCharacters)).then(_ => {
