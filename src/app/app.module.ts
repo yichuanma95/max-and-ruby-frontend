@@ -13,6 +13,7 @@ import { CharacterComponent } from './characters/character/character.component';
 import { AuthComponent } from './auth/auth.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NewEpisodeComponent } from './new-episode/new-episode.component';
+import { LoadingSpinnerComponent } from './new-episode/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NewEpisodeComponent } from './new-episode/new-episode.component';
     DepthChartComponent,
     CharacterComponent,
     AuthComponent,
-    NewEpisodeComponent
+    NewEpisodeComponent,
+    LoadingSpinnerComponent
   ],
     imports: [
         BrowserModule,

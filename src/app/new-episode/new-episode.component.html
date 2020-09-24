@@ -1,3 +1,10 @@
+<div class="text-center" *ngIf="addedEpisode">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="alert alert-success alert-dismissible fade d-none" role="alert" id="episode-success">
+  Episode information successfully saved!
+  <button type="button" class="close" (click)="onCloseAlert()">&times;</button>
+</div>
 <form [formGroup]="newEpisodeForm" (ngSubmit)="onSubmit()">
   <button class="btn btn-success" type="submit" [disabled]="!newEpisodeForm.valid">Save</button>
   <span style="margin: 10px"></span>
@@ -11,7 +18,7 @@
       </select>
     </div>
     <div class="col-md-4 form-group">
-      <label for="episode-no">Overall Episode No.</label>
+      <label for="episode-no">This is part of Overall Episode No.</label>
       <input id="episode-no" formControlName="episodeNo" class="form-control" type="number" min="1">
     </div>
     <div class="col-md-4 form-group">

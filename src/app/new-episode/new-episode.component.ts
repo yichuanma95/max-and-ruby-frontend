@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {CharactersService} from '../characters/characters.service';
 import {BunnyCharacter} from '../characters/character.model';
 import {Subscription} from 'rxjs';
+import {EpisodesService} from '../episodes/episodes.service';
 import {Episode} from '../episodes/episode.model';
 
 @Component({
@@ -19,6 +20,7 @@ export class NewEpisodeComponent implements OnInit {
   ruby: BunnyCharacter;
   characterSub: Subscription;
   seasons = [...Array(5).keys()].map(i => i + 1);
+  addedEpisode: Episode = null;
 
   get maxWordsControls() {
     return (this.newEpisodeForm.get('maxWords') as FormArray).controls;
@@ -39,6 +41,14 @@ export class NewEpisodeComponent implements OnInit {
       this.location.back();
   }
 
+  onCloseAlert() {
+    let alertElem = document.getElementById('episode-success');
+    alertElem.classList.remove("show");
+    setTimeout(() => {
+      alertElem.classList.add("d-none");
+    }, 250);
+  }
+
   onSubmit() {
     if (this.navigateToLogin())
       return;
@@ -50,15 +60,32 @@ export class NewEpisodeComponent implements OnInit {
       plot: this.newEpisodeForm.value.plot,
       littleBrothers: this.newEpisodeForm.value.littleBrothers
     };
-    console.log(newEpisode);
-    console.log(this.newEpisodeForm.value.characters);
+    let appearingCharacters = this.newEpisodeForm.value.characters ? [...this.newEpisodeForm.value.characters] : [];
+    appearingCharacters.push(this.max.id);
+    appearingCharacters.push(this.ruby.id);
     let maxWords = this.newEpisodeForm.value.maxWords.map(word => {
       return {
         originalWords: word.words,
         searchableWords: word.words.toLowerCase().split('').filter(c => /^[a-z]$/i.test(c)).join('')
       };
     });
-    console.log(maxWords);
+    this.episodesService.addEpisode(newEpisode).then(episode => {
+      this.addedEpisode = episode;
+      return this.episodesService.updateMaxWords(maxWords);
+    }, _ => {
+      localStorage.removeItem("admin");
+      this.navigateToLogin();
+    }).then(maxWords => {
+      let mwids = maxWords.map(word => word.id);
+      return this.episodesService.addMaxWordsToEpisode(this.addedEpisode.id, mwids);
+    }).then(_ => {
+      return this.charactersService.addCharactersToEpisode(this.addedEpisode.id, appearingCharacters);
+    }).then(_ => {
+      this.addedEpisode = null;
+      let alertElem = document.getElementById("episode-success");
+      alertElem.classList.remove("d-none");
+      alertElem.classList.add("show");
+    });
   }
 
   private initForm() {
@@ -87,7 +114,12 @@ export class NewEpisodeComponent implements OnInit {
     return false;
   }
 
-  constructor(private router: Router, private location: Location, private charactersService: CharactersService) { }
+  constructor(
+    private router: Router,
+    private location: Location,
+    private charactersService: CharactersService,
+    private episodesService: EpisodesService
+  ) { }
 
   ngOnInit(): void {
     if (!this.navigateToLogin()) {

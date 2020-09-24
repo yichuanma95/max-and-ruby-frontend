@@ -24,5 +24,9 @@ export class CharactersService {
     });
   }
 
+  addCharactersToEpisode(eid, mwids) {
+    return this.characterServiceClient.addCharactersToEpisode(eid, mwids);
+  }
+
   constructor(private characterServiceClient: CharacterServiceClient) { }
 }
