@@ -1,0 +1,20 @@
+<h1>Editing</h1>
+<br/>
+<div class="alert alert-success alert-dismissible fade d-none" role="alert" id="bunny-saved">
+  Bunny information successfully saved!
+  <button type="button" class="close" (click)="onCloseAlert()">&times;</button>
+</div>
+<form [formGroup]="editCharacterForm" (ngSubmit)="onSubmit()">
+  <button class="btn btn-success" type="submit">Save</button>
+  <span style="margin: 10px"></span>
+  <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+  <br/><br/>
+  <div class="form-group">
+    <label for="name">Bunny Name</label>
+    <input class="form-control" type="text" id="name" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="bio">Bunny Bio</label>
+    <textarea type="text" id="bio" formControlName="bio" class="form-control" rows="8"></textarea>
+  </div>
+</form>

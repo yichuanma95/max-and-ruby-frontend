@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Location} from '@angular/common';
@@ -7,13 +7,14 @@ import {BunnyCharacter} from '../characters/character.model';
 import {Subscription} from 'rxjs';
 import {EpisodesService} from '../episodes/episodes.service';
 import {Episode} from '../episodes/episode.model';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-new-episode',
   templateUrl: './new-episode.component.html',
   styleUrls: ['./new-episode.component.css']
 })
-export class NewEpisodeComponent implements OnInit {
+export class NewEpisodeComponent implements OnInit, OnDestroy {
   newEpisodeForm: FormGroup;
   characters: BunnyCharacter[] = [];
   max: BunnyCharacter;
@@ -37,20 +38,16 @@ export class NewEpisodeComponent implements OnInit {
   }
 
   onCancel() {
-    if (!this.navigateToLogin())
+    if (!this.authService.navigateToLogin())
       this.location.back();
   }
 
   onCloseAlert() {
-    let alertElem = document.getElementById('episode-success');
-    alertElem.classList.remove("show");
-    setTimeout(() => {
-      alertElem.classList.add("d-none");
-    }, 250);
+    this.authService.closeAlert('episode-success');
   }
 
   onSubmit() {
-    if (this.navigateToLogin())
+    if (this.authService.navigateToLogin())
       return;
     let newEpisode = {
       season: +this.newEpisodeForm.value.season,
@@ -61,8 +58,7 @@ export class NewEpisodeComponent implements OnInit {
       littleBrothers: this.newEpisodeForm.value.littleBrothers
     };
     let appearingCharacters = this.newEpisodeForm.value.characters ? [...this.newEpisodeForm.value.characters] : [];
-    appearingCharacters.push(this.max.id);
-    appearingCharacters.push(this.ruby.id);
+    appearingCharacters.splice(0, 0, this.max.id, this.ruby.id);
     let maxWords = this.newEpisodeForm.value.maxWords.map(word => {
       return {
         originalWords: word.words,
@@ -74,17 +70,14 @@ export class NewEpisodeComponent implements OnInit {
       return this.episodesService.updateMaxWords(maxWords);
     }, _ => {
       localStorage.removeItem("admin");
-      this.navigateToLogin();
+      this.authService.navigateToLogin();
     }).then(maxWords => {
       let mwids = maxWords.map(word => word.id);
       return this.episodesService.addMaxWordsToEpisode(this.addedEpisode.id, mwids);
-    }).then(_ => {
-      return this.charactersService.addCharactersToEpisode(this.addedEpisode.id, appearingCharacters);
-    }).then(_ => {
+    }).then(_ => this.charactersService.addCharactersToEpisode(this.addedEpisode.id, appearingCharacters)).then(_ => {
       this.addedEpisode = null;
-      let alertElem = document.getElementById("episode-success");
-      alertElem.classList.remove("d-none");
-      alertElem.classList.add("show");
+      this.authService.showAlert('episode-success');
+      this.newEpisodeForm.reset();
     });
   }
 
@@ -104,25 +97,16 @@ export class NewEpisodeComponent implements OnInit {
     });
   }
 
-  private navigateToLogin() {
-    if (localStorage.getItem('admin') === null) {
-      this.router.navigate(['/login']).then(_ => {
-        location.reload();
-      });
-      return true;
-    }
-    return false;
-  }
-
   constructor(
     private router: Router,
     private location: Location,
     private charactersService: CharactersService,
-    private episodesService: EpisodesService
+    private episodesService: EpisodesService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    if (!this.navigateToLogin()) {
+    if (!this.authService.navigateToLogin()) {
       this.characterSub = this.charactersService.charactersChanged.subscribe(characters => {
         this.max = characters.find(c => c.name === 'Max');
         this.ruby = characters.find(c => c.name === 'Ruby');
@@ -133,4 +117,8 @@ export class NewEpisodeComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    if (this.characterSub)
+      this.characterSub.unsubscribe();
+  }
 }

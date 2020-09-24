@@ -1,3 +1,4 @@
+<a [routerLink]="['edit']" class="float-right" *ngIf="loggedIn">Edit</a>
 <h1>{{character.name}}</h1>
 <p *ngFor="let p of character.bio.split('\n')">{{p}}</p>
 <br/>

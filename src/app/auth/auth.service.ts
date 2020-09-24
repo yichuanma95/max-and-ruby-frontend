@@ -31,5 +31,29 @@ export class AuthService {
     });
   }
 
+  showAlert(id) {
+    let alertElem = document.getElementById(id);
+    alertElem.classList.remove('d-none');
+    alertElem.classList.add('show');
+  }
+
+  closeAlert(id) {
+    let alertElem = document.getElementById(id);
+    alertElem.classList.remove("show");
+    setTimeout(() => {
+      alertElem.classList.add("d-none");
+    }, 250);
+  }
+
+  navigateToLogin() {
+    if (localStorage.getItem('admin') === null) {
+      this.router.navigate(['/login']).then(_ => {
+        location.reload();
+      });
+      return true;
+    }
+    return false;
+  }
+
   constructor(private episodeServiceClient: EpisodeServiceClient, private router: Router) { }
 }

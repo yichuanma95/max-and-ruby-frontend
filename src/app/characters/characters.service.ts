@@ -7,7 +7,7 @@ import {Subject} from 'rxjs';
 export class CharactersService {
   characters: BunnyCharacter[] = [];
   charactersChanged = new Subject<BunnyCharacter[]>();
-  selectedCharacter: BunnyCharacter = {id: 0, name: 'nobody', bio: 'i am nobody'};
+  selectedCharacter: BunnyCharacter = {id: 0, name: 'Robot', bio: 'I am a robot'};
   selectionChanged = new Subject<BunnyCharacter>();
 
   fetchCharacters() {
@@ -17,8 +17,8 @@ export class CharactersService {
     });
   }
 
-  fetchCharacter(cid: number) {
-    this.characterServiceClient.findCharacterById(cid).then((character: BunnyCharacter) => {
+  fetchCharacter(name: string) {
+    this.characterServiceClient.findCharacterByName(name).then((character: BunnyCharacter) => {
       this.selectedCharacter = character;
       this.selectionChanged.next(this.selectedCharacter);
     });

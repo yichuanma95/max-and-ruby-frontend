@@ -14,6 +14,7 @@ import { AuthComponent } from './auth/auth.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NewEpisodeComponent } from './new-episode/new-episode.component';
 import { LoadingSpinnerComponent } from './new-episode/loading-spinner/loading-spinner.component';
+import { CharacterEditComponent } from './characters/character-edit/character-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoadingSpinnerComponent } from './new-episode/loading-spinner/loading-s
     CharacterComponent,
     AuthComponent,
     NewEpisodeComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    CharacterEditComponent
   ],
     imports: [
         BrowserModule,

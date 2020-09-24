@@ -10,9 +10,10 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./character.component.css']
 })
 export class CharacterComponent implements OnInit, OnDestroy {
-  character: BunnyCharacter = {id: 0, name: '', bio: ''};
+  character: BunnyCharacter = {id: 0, name: 'Robot', bio: 'Take me to your leader!'};
   characterSub: Subscription;
   paramSub: Subscription;
+  loggedIn = localStorage.getItem('admin');
 
   constructor(private charactersService: CharactersService, private route: ActivatedRoute) { }
 
@@ -21,7 +22,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
       this.character = character;
     });
     this.paramSub = this.route.params.subscribe(params => {
-      this.charactersService.fetchCharacter(+params.id);
+      this.charactersService.fetchCharacter(params.name);
     });
   }
 

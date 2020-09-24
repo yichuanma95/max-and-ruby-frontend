@@ -18,7 +18,7 @@
   <a
     class="list-group-item clearfix"
     *ngFor="let character of characters"
-    [routerLink]="[character.id, character.name]"
+    [routerLink]="[character.name]"
     style="cursor: pointer"
   >
     {{character.name}}
