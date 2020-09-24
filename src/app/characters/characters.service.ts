@@ -28,5 +28,9 @@ export class CharactersService {
     return this.characterServiceClient.addCharactersToEpisode(eid, mwids);
   }
 
+  updateCharacter(cid, character) {
+    return this.characterServiceClient.updateCharacter(cid, character);
+  }
+
   constructor(private characterServiceClient: CharacterServiceClient) { }
 }

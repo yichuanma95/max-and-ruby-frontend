@@ -15,4 +15,13 @@ export class CharacterServiceClient {
     },
     credentials: 'include'
   }).then(response => response.json());
+
+  updateCharacter = (cid, character) => fetch(`${API_URL}/characters/${cid}`, {
+    method: "PUT",
+    body: JSON.stringify(character),
+    headers: {
+      "content-type": "application/json"
+    },
+    credentials: 'include'
+  }).then(response => response.json());
 }

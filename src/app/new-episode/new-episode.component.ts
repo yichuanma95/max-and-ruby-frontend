@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Location} from '@angular/common';
 import {CharactersService} from '../characters/characters.service';
 import {BunnyCharacter} from '../characters/character.model';
 import {Subscription} from 'rxjs';
@@ -38,8 +37,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    if (!this.authService.navigateToLogin())
-      this.location.back();
+    this.authService.cancelEdit();
   }
 
   onCloseAlert() {
@@ -47,8 +45,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.authService.navigateToLogin())
-      return;
+    this.authService.navigateToLogin();
     let newEpisode = {
       season: +this.newEpisodeForm.value.season,
       episodeNo: this.newEpisodeForm.value.episodeNo,
@@ -99,7 +96,6 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private location: Location,
     private charactersService: CharactersService,
     private episodesService: EpisodesService,
     private authService: AuthService

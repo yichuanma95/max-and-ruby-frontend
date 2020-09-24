@@ -4,7 +4,6 @@ import {BunnyCharacter} from '../character.model';
 import {Subscription} from 'rxjs';
 import {CharactersService} from '../characters.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
 import {AuthService} from '../../auth/auth.service';
 
 @Component({
@@ -19,8 +18,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   paramSub: Subscription;
 
   onCancel() {
-    if (!this.authService.navigateToLogin())
-      this.location.back();
+    this.authService.cancelEdit();
   }
 
   onSubmit() {
@@ -31,8 +29,13 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
       name: this.editCharacterForm.value.name,
       bio: this.editCharacterForm.value.bio
     }
-    console.log(updatedCharacter);
-    this.authService.showAlert('bunny-saved');
+    this.charactersService.updateCharacter(this.character.id, updatedCharacter).then(response => {
+      if (response === 0) {
+        localStorage.removeItem("admin");
+        this.authService.navigateToLogin();
+      }
+      this.authService.showAlert('bunny-saved');
+    });
   }
 
   onCloseAlert() {
@@ -49,7 +52,6 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   constructor(
     private charactersService: CharactersService,
     private route: ActivatedRoute,
-    private location: Location,
     private router: Router,
     private authService: AuthService
   ) { }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {EpisodeServiceClient} from '../services/EpisodeServiceClient';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {Location} from '@angular/common';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -55,5 +56,10 @@ export class AuthService {
     return false;
   }
 
-  constructor(private episodeServiceClient: EpisodeServiceClient, private router: Router) { }
+  cancelEdit() {
+    this.navigateToLogin();
+    this.location.back();
+  }
+
+  constructor(private episodeServiceClient: EpisodeServiceClient, private router: Router, private location: Location) { }
 }
