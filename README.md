@@ -11,6 +11,10 @@ originally produced by Nelvana Ltd. in Canada in 2002-2019 and aired in the U.S.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
 
+## Setup
+
+Run `npm install` to install all packages that this project uses.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
