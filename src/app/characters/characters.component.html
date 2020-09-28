@@ -1,7 +1,13 @@
 <form #searchChar="ngForm" (ngSubmit)="onSearch(searchChar)">
   <div class="row">
     <div class="col-md-8 form-group">
-      <input class="form-control" ngModel name="searchQuery" type="text" placeholder="Name of your favorite bunny">
+      <input
+        class="form-control"
+        ngModel
+        name="searchQuery"
+        type="text"
+        placeholder="Name of your favorite bunny in this series"
+      >
     </div>
     <div class="col-md-4">
       <button class="btn btn-primary btn-block" type="submit">Search Bunnies</button>

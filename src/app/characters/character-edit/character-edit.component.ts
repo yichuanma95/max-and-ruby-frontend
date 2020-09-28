@@ -31,7 +31,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
     }
     this.charactersService.updateCharacter(this.character.id, updatedCharacter).then(response => {
       if (response === 0) {
-        this.authService.handleSessionNotInServer(0);
+        this.authService.handleSessionNotInServer();
       }
       this.authService.showAlert('bunny-saved');
     });

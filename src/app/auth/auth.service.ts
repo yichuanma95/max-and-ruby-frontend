@@ -51,7 +51,7 @@ export class AuthService {
     this.location.back();
   }
 
-  handleSessionNotInServer(_) {
+  handleSessionNotInServer() {
     localStorage.removeItem("admin");
     this.navigateToLogin();
   }

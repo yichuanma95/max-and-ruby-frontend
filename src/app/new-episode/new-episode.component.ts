@@ -72,8 +72,8 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       this.addedEpisode = null;
       this.authService.showAlert('episode-success');
       this.newEpisodeForm.reset();
-    }).catch(e => {
-      this.authService.handleSessionNotInServer(e);
+    }).catch(_ => {
+      this.authService.handleSessionNotInServer();
     });
   }
 
