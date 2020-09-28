@@ -46,16 +46,6 @@ export class AuthService {
     }, 250);
   }
 
-  navigateToLogin() {
-    if (localStorage.getItem('admin') === null) {
-      this.router.navigate(['/login']).then(_ => {
-        location.reload();
-      });
-      return true;
-    }
-    return false;
-  }
-
   cancelEdit() {
     this.navigateToLogin();
     this.location.back();
@@ -64,6 +54,17 @@ export class AuthService {
   handleSessionNotInServer(_) {
     localStorage.removeItem("admin");
     this.navigateToLogin();
+  }
+
+  navigateToLogin() {
+    if (localStorage.getItem('admin') === null) {
+      this.router.navigate(['/login']).then(_ => {
+        this.loggedIn = false;
+        this.loginChanged.next(this.loggedIn);
+      });
+      return true;
+    }
+    return false;
   }
 
   constructor(private episodeServiceClient: EpisodeServiceClient, private router: Router, private location: Location) { }

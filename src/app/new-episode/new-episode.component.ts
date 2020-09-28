@@ -28,11 +28,11 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
 
   onAddMaxWords() {
     (<FormArray> this.newEpisodeForm.get('maxWords')).push(new FormGroup({
-      words: new FormControl(null, Validators.required)
+      words: new FormControl('', Validators.required)
     }));
   }
 
-  onDeleteMaxWord(index: number) {
+  onDeleteMaxWords(index: number) {
     (<FormArray> this.newEpisodeForm.get('maxWords')).removeAt(index);
   }
 
@@ -54,7 +54,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       plot: this.newEpisodeForm.value.plot,
       littleBrothers: this.newEpisodeForm.value.littleBrothers
     };
-    let appearingCharacters = this.newEpisodeForm.value.characters ? [...this.newEpisodeForm.value.characters] : [];
+    let appearingCharacters = [...this.newEpisodeForm.value.characters];
     appearingCharacters.splice(0, 0, this.max.id, this.ruby.id);
     let maxWords = this.newEpisodeForm.value.maxWords.map(word => {
       return {
@@ -65,13 +65,15 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
     this.episodesService.addEpisode(newEpisode).then(episode => {
       this.addedEpisode = episode;
       return this.episodesService.updateMaxWords(maxWords);
-    }, this.authService.handleSessionNotInServer).then(maxWords => {
+    }).then(maxWords => {
       let mwids = maxWords.map(word => word.id);
       return this.episodesService.addMaxWordsToEpisode(this.addedEpisode.id, mwids);
     }).then(_ => this.charactersService.addCharactersToEpisode(this.addedEpisode.id, appearingCharacters)).then(_ => {
       this.addedEpisode = null;
       this.authService.showAlert('episode-success');
       this.newEpisodeForm.reset();
+    }).catch(e => {
+      this.authService.handleSessionNotInServer(e);
     });
   }
 
@@ -84,7 +86,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       ]),
       segment: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
-      characters: new FormControl(null, []),
+      characters: new FormControl([], []),
       plot: new FormControl('', Validators.required),
       littleBrothers: new FormControl(false, []),
       maxWords: new FormArray([])
