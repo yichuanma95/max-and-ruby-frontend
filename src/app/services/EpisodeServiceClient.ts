@@ -17,6 +17,11 @@ export class EpisodeServiceClient {
     credentials: 'include'
   });
 
+  verifySession = () => fetch(`${API_URL}/verify`, {
+    method: "POST",
+    credentials: 'include'
+  }).then(response => response.json());
+
   addEpisode = episode => fetch(`${API_URL}/episodes`, {
     method: "POST",
     body: JSON.stringify(episode),

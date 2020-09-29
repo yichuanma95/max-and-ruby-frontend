@@ -22,17 +22,13 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.authService.navigateToLogin())
-      return;
+    this.authService.navigateToLogin();
     let updatedCharacter: BunnyCharacter = {
       id: this.character.id,
       name: this.editCharacterForm.value.name,
       bio: this.editCharacterForm.value.bio
     }
-    this.charactersService.updateCharacter(this.character.id, updatedCharacter).then(response => {
-      if (response === 0) {
-        this.authService.handleSessionNotInServer();
-      }
+    this.charactersService.updateCharacter(this.character.id, updatedCharacter).then(_ => {
       this.authService.showAlert('bunny-saved');
     });
   }

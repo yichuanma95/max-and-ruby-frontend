@@ -72,8 +72,6 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       this.addedEpisode = null;
       this.authService.showAlert('episode-success');
       this.newEpisodeForm.reset();
-    }).catch(_ => {
-      this.authService.handleSessionNotInServer();
     });
   }
 
@@ -101,19 +99,19 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    if (!this.authService.navigateToLogin()) {
-      this.characterSub = this.charactersService.charactersChanged.subscribe(characters => {
-        this.max = characters.find(c => c.name === 'Max');
-        this.ruby = characters.find(c => c.name === 'Ruby');
-        this.characters = characters.filter(c => !['Max', 'Ruby'].includes(c.name));
-      });
-      this.charactersService.fetchCharacters();
-      this.initForm();
-    }
+    this.authService.navigateToLogin();
+    this.characterSub = this.charactersService.charactersChanged.subscribe(characters => {
+      this.max = characters.find(c => c.name === 'Max');
+      this.ruby = characters.find(c => c.name === 'Ruby');
+      this.characters = characters.filter(c => !['Max', 'Ruby'].includes(c.name));
+    });
+    this.charactersService.fetchCharacters();
+    this.initForm();
   }
 
   ngOnDestroy() {
-    if (this.characterSub)
+    if (this.characterSub) {
       this.characterSub.unsubscribe();
+    }
   }
 }

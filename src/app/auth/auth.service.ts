@@ -25,11 +25,23 @@ export class AuthService {
 
   logout() {
     this.episodeServiceClient.logout().then(_ => {
-      localStorage.removeItem("admin");
-      this.loggedIn = false;
-      this.loginChanged.next(this.loggedIn);
+      this.logOutInClient();
       this.router.navigate(["/"]);
     });
+  }
+
+  autoLogout() {
+    this.episodeServiceClient.verifySession().then(isLoggedIn => {
+      if (!isLoggedIn) {
+        this.logOutInClient();
+      }
+    });
+  }
+
+  private logOutInClient() {
+    localStorage.removeItem("admin");
+    this.loggedIn = false;
+    this.loginChanged.next(this.loggedIn);
   }
 
   showAlert(id) {
@@ -51,20 +63,13 @@ export class AuthService {
     this.location.back();
   }
 
-  handleSessionNotInServer() {
-    localStorage.removeItem("admin");
-    this.navigateToLogin();
-  }
-
   navigateToLogin() {
     if (localStorage.getItem('admin') === null) {
       this.router.navigate(['/login']).then(_ => {
         this.loggedIn = false;
         this.loginChanged.next(this.loggedIn);
       });
-      return true;
     }
-    return false;
   }
 
   constructor(private episodeServiceClient: EpisodeServiceClient, private router: Router, private location: Location) { }
