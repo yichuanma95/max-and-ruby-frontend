@@ -54,7 +54,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       plot: this.newEpisodeForm.value.plot,
       littleBrothers: this.newEpisodeForm.value.littleBrothers
     };
-    let appearingCharacters = [...this.newEpisodeForm.value.characters];
+    let appearingCharacters = this.newEpisodeForm.value.characters ? [...this.newEpisodeForm.value.characters] : [];
     appearingCharacters.splice(0, 0, this.max.id, this.ruby.id);
     let maxWords = this.newEpisodeForm.value.maxWords.map(word => {
       return {
@@ -72,6 +72,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       this.addedEpisode = null;
       this.authService.showAlert('episode-success');
       this.newEpisodeForm.reset();
+      (<FormArray> this.newEpisodeForm.get('maxWords')).clear();
     });
   }
 
@@ -84,7 +85,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       ]),
       segment: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
-      characters: new FormControl([], []),
+      characters: new FormControl(null, []),
       plot: new FormControl('', Validators.required),
       littleBrothers: new FormControl(false, []),
       maxWords: new FormArray([])
