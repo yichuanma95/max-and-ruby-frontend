@@ -84,7 +84,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
       ]),
       segment: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
-      characters: new FormControl(null, []),
+      characters: new FormControl([], []),
       plot: new FormControl('', Validators.required),
       littleBrothers: new FormControl(false, []),
       maxWords: new FormArray([])
