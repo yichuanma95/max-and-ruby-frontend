@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./character.component.css']
 })
 export class CharacterComponent implements OnInit, OnDestroy {
-  character: BunnyCharacter = {id: 0, name: 'Robot', bio: 'Take me to your leader!'};
+  character: BunnyCharacter = {id: 0, name: 'Walkie-Talkie Bear', bio: 'I\'m a bear!'};
   characterSub: Subscription;
   paramSub: Subscription;
   loggedIn = localStorage.getItem('admin');

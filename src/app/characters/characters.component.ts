@@ -10,7 +10,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./characters.component.css']
 })
 export class CharactersComponent implements OnInit, OnDestroy {
-  characters: BunnyCharacter[] = [];
+  characters: BunnyCharacter[] = [{id: -1, name: "Hello-World Macaw", bio: "Sqwalk! Bonjour! Kalimeda! Guten-tag! Namaste! Buongiorno!"}];
   characterSub: Subscription;
   lastQuery = '';
 

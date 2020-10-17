@@ -22,6 +22,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.authService.autoLogout();
     this.authService.navigateToLogin();
     let updatedCharacter: BunnyCharacter = {
       id: this.character.id,

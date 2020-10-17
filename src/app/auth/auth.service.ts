@@ -59,6 +59,7 @@ export class AuthService {
   }
 
   cancelEdit() {
+    this.autoLogout();
     this.navigateToLogin();
     this.location.back();
   }

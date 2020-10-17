@@ -45,6 +45,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.authService.autoLogout();
     this.authService.navigateToLogin();
     let newEpisode = {
       season: +this.newEpisodeForm.value.season,
