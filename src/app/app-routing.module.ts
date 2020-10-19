@@ -9,6 +9,7 @@ import {CharacterComponent} from './characters/character/character.component';
 import {AuthComponent} from './auth/auth.component';
 import {NewEpisodeComponent} from './new-episode/new-episode.component';
 import {CharacterEditComponent} from './characters/character-edit/character-edit.component';
+import {MiscComponent} from './misc/misc.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'episodes', component: EpisodesComponent},
   {path: 'depth-chart', component: DepthChartComponent},
   {path: 'login', component: AuthComponent},
+  {path: 'misc', component: MiscComponent},
   {path: 'new-episode', component: NewEpisodeComponent}
 ];
 

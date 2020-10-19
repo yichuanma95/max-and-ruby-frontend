@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NewEpisodeComponent} from './new-episode/new-episode.component';
 import {LoadingSpinnerComponent} from './new-episode/loading-spinner/loading-spinner.component';
 import {CharacterEditComponent} from './characters/character-edit/character-edit.component';
+import { MiscComponent } from './misc/misc.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {CharacterEditComponent} from './characters/character-edit/character-edit
     AuthComponent,
     NewEpisodeComponent,
     LoadingSpinnerComponent,
-    CharacterEditComponent
+    CharacterEditComponent,
+    MiscComponent
   ],
     imports: [
         BrowserModule,
