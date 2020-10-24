@@ -16,6 +16,7 @@ import {NewEpisodeComponent} from './new-episode/new-episode.component';
 import {LoadingSpinnerComponent} from './new-episode/loading-spinner/loading-spinner.component';
 import {CharacterEditComponent} from './characters/character-edit/character-edit.component';
 import { MiscComponent } from './misc/misc.component';
+import { PhotosComponent } from './photos/photos.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MiscComponent } from './misc/misc.component';
     NewEpisodeComponent,
     LoadingSpinnerComponent,
     CharacterEditComponent,
-    MiscComponent
+    MiscComponent,
+    PhotosComponent
   ],
     imports: [
         BrowserModule,
