@@ -30,10 +30,19 @@ export class AuthService {
     });
   }
 
+  autoLogoutFromHome() {
+    this.episodeServiceClient.verifySession().then(isLoggedIn => {
+      if (!isLoggedIn) {
+        this.logOutInClient();
+      }
+    });
+  }
+
   autoLogout() {
     this.episodeServiceClient.verifySession().then(isLoggedIn => {
       if (!isLoggedIn) {
         this.logOutInClient();
+        this.router.navigate(["/login"])
       }
     });
   }

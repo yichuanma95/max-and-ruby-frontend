@@ -100,6 +100,7 @@ export class NewEpisodeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.authService.autoLogout();
     this.authService.navigateToLogin();
     this.characterSub = this.charactersService.charactersChanged.subscribe(characters => {
       this.max = characters.find(c => c.name === 'Max');

@@ -53,6 +53,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.authService.autoLogout();
     this.authService.navigateToLogin();
     this.characterSub = this.charactersService.selectionChanged.subscribe(character => {
       this.character = character;
