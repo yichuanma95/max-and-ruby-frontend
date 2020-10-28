@@ -22,8 +22,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.authService.autoLogout();
-    this.authService.navigateToLogin();
+    this.authService.closeExpiredSession();
     let updatedCharacter: BunnyCharacter = {
       id: this.character.id,
       name: this.editCharacterForm.value.name,
@@ -53,8 +52,7 @@ export class CharacterEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.authService.autoLogout();
-    this.authService.navigateToLogin();
+    this.authService.closeExpiredSession();
     this.characterSub = this.charactersService.selectionChanged.subscribe(character => {
       this.character = character;
       this.initForm();

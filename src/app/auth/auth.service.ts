@@ -38,6 +38,11 @@ export class AuthService {
     });
   }
 
+  closeExpiredSession() {
+    this.autoLogout();
+    this.navigateToLogin();
+  }
+
   autoLogout() {
     this.episodeServiceClient.verifySession().then(isLoggedIn => {
       if (!isLoggedIn) {
@@ -68,8 +73,7 @@ export class AuthService {
   }
 
   cancelEdit() {
-    this.autoLogout();
-    this.navigateToLogin();
+    this.closeExpiredSession();
     this.location.back();
   }
 
